@@ -1,0 +1,73 @@
+#extend("admin/main/_layout")
+
+#export("body") {
+  <ol class="box breadcrumb">
+    <li class="breadcrumb-item active">Entries</li>
+  </ol>
+
+  <div class="box page-header">
+    <div class="page-title">
+      <h1>Entries</h1>
+    </div>
+    <div class="page-actions">
+      #embed("admin/main/entry/actions")
+    </div>
+  </div>
+
+  <div class="panel">
+    <div id="submenu" class="submenu">
+      <nav class="menu">
+  			<ul class="nav">
+  				<li>
+  					<a href="#adminPath("entries")"> All entries</a>
+  				</li>
+          #loop(prototypes, "item") {
+    				<li>
+    					<a href="/admin/entries/#(item.handle)">#(item.name)</a>
+    				</li>
+          }
+  			</ul>
+  		</nav>
+    </div>
+    <div class="box segment">
+      #index(entries, "0") {
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Prototype</th>
+              <th>Publish date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            #loop(entries, "item") {
+              <tr>
+                <td>#(item.id)</td>
+                <td>
+                  <a href="/admin/entries/#(item.prototype.handle)/#(item.id)">#(item.title)</a>
+                </td>
+                <td>#(item.prototype.name)</td>
+                <td>#(item.publishedAt)</td>
+                <td class="action">
+                  <a href="#(item.url)"><i class="fa fa-eye"></i></a>
+                  <a class="danger" href="#(item.url)"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } ##else() {
+        #index(prototypes, "0") {
+          <p>Try adding some entries!</p>
+        } ##else() {
+          <p>To create new entries you need to have at least 1 prototype!</p>
+          <a href="#adminPath("prototypes/new")" class="btn btn-primary">
+            <i class="fa fa-plus"></i> New prototype
+          </a>
+        }
+      }
+    </div>
+  </div>
+}
