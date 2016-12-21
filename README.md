@@ -7,6 +7,10 @@
 
 Demo for [Novel](https://github.com/hyperoslo/novel) Swift CMS.
 
+* Admin panel: https://novel-demo.herokuapp.com/admin (admin/password)
+* Front page: https://novel-demo.herokuapp.com
+* API: https://novel-demo.herokuapp.com/api/entries/post
+
 ## Author
 
 Vadym Markov, markov.vadym@gmail.com
